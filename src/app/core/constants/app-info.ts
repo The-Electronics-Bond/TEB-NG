@@ -4,15 +4,15 @@ export const APP_INFO = {
     tagline: 'Solution for all your electronics needs',
     contactPerson: {
         name: 'Dev Thakur',
-        designation: 'Founder & CEO'
+        designation: 'Corporate Supplier'
     },
     address: {
-        line1: 'D 240, 2nd Floor, Madhu Vihar',
-        line2: 'Uttam Nagar, Opp. to Dwarka Sector-5',
+        line1: 'D 240, Madhu Vihar',
+        line2: 'Opp. to Dwarka Sector-5',
         city: 'New Delhi',
         pincode: '110059',
         country: 'India',
-        fullAddress: 'D 240, 2nd Floor, Madhu Vihar, Uttam Nagar, Opp. to Dwarka Sector-5, New Delhi - 110059, India'
+        fullAddress: 'D 240, Madhu Vihar, Opp. to Dwarka Sector-5, New Delhi - 110059, India'
     },
     phones: [
         '+91 98730 25712',
