@@ -18,7 +18,7 @@ export const APP_INFO = {
         '+91 98730 25712',
         '+91 89207 46640'
     ],
-    email: 'theelectronicsbond@gmail.com',
+    email: 'info@theelectronicsbond.com',
     gst: '07AMQPT3879E1ZC',
     socials: {
         linkedin: '#',
