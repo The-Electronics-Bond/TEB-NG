@@ -7,73 +7,28 @@
 
 <section class="category-section">
     <div class="container">
+        @if (categories$ | async; as categories) {
         <div class="category-grid">
-
-            <!-- Category 1: LED TV -->
-            <a routerLink="/contact" class="category-card">
+            @for (category of categories; track category._id) {
+            <a [routerLink]="['/products', category.slug.current]" class="category-card group">
                 <div class="card-image">
-                    <img src="https://placehold.co/400x300/2563eb/FFF?text=LED+TV" alt="LED TV">
+                    <img [src]="category.imageUrl || 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800'"
+                        [alt]="category.name">
                 </div>
                 <div class="card-content">
-                    <h2 class="category-title">LED TV</h2>
-                    <p class="category-desc">LG, Samsung, Sony, Panasonic, VU, Videocon, Micromax, Haier, Lumx, MarQ.
-                    </p>
-                    <span class="btn-link">Inquire Now &rarr;</span>
+                    <h2 class="category-title">{{ category.name }}</h2>
+                    <p class="category-desc">{{ category.description }}</p>
+                    <span class="btn-link">View Models &rarr;</span>
                 </div>
             </a>
-
-            <!-- Category 2: Mobiles -->
-            <a routerLink="/contact" class="category-card">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x300/db2777/FFF?text=Mobiles" alt="Mobiles">
-                </div>
-                <div class="card-content">
-                    <h2 class="category-title">Mobiles</h2>
-                    <p class="category-desc">Apple, Samsung, OPPO, Vivo, Panasonic, Motorola, Google, LG, Realme.</p>
-                    <span class="btn-link">Inquire Now &rarr;</span>
-                </div>
-            </a>
-
-            <!-- Category 3: Air Conditioners -->
-            <a routerLink="/contact" class="category-card">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x300/16a34a/FFF?text=Air+Conditioners" alt="Air Conditioners">
-                </div>
-                <div class="card-content">
-                    <h2 class="category-title">Air Conditioners</h2>
-                    <p class="category-desc">Hitachi, O General, Daikin, Voltas, Samsung, LG, Haier, Bluestar,
-                        Mitsubishi, Lumx, Carrier, Whirlpool, Whitehouse.</p>
-                    <span class="btn-link">Inquire Now &rarr;</span>
-                </div>
-            </a>
-
-            <!-- Category 4: Refrigerators -->
-            <a routerLink="/contact" class="category-card">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x300/ea580c/FFF?text=Refrigerators" alt="Refrigerators">
-                </div>
-                <div class="card-content">
-                    <h2 class="category-title">Refrigerators</h2>
-                    <p class="category-desc">Samsung, LG, Whirlpool, Haier, Godrej, Panasonic.</p>
-                    <span class="btn-link">Inquire Now &rarr;</span>
-                </div>
-            </a>
-
-            <!-- Category 5: Electrical & Utilites -->
-            <a routerLink="/contact" class="category-card">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x300/7c3aed/FFF?text=Electrical+%26+Other+Items"
-                        alt="Electrical & Other Items">
-                </div>
-                <div class="card-content">
-                    <h2 class="category-title">Electrical & Other Items</h2>
-                    <p class="category-desc">Laptops, Water Dispensers, Water Coolers, Washing Machines, Mixers,
-                        Juicers, Irons, Inverters, Geysers, Heaters, and all types of Electrical Items.</p>
-                    <span class="btn-link">Inquire Now &rarr;</span>
-                </div>
-            </a>
-
+            }
         </div>
+        } @else {
+        <div class="loading-state">
+            <p>Connecting to catalog...</p>
+        </div>
+        }
+
     </div>
 </section>
 
