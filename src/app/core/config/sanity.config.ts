@@ -1,12 +1,12 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
+import { environment } from '../../../environments/environment';
 
 export const sanityClient = createClient({
-    projectId: 'PLACEHOLDER_PROJECT_ID', // Replace with your Project ID
-    dataset: 'production',               // Replace with your dataset name
-    useCdn: true,                        // `false` if you want to ensure fresh data
-    apiVersion: '2023-05-03',            // Use the current date
-    // token: 'PLACEHOLDER_TOKEN',       // Optional: only if you need to fetch private data
+    projectId: environment.sanity.projectId,
+    dataset: environment.sanity.dataset,
+    useCdn: environment.sanity.useCdn,
+    apiVersion: environment.sanity.apiVersion,
 });
 
 const builder = imageUrlBuilder(sanityClient);

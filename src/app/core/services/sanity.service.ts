@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,10 +12,10 @@ export class SanityService {
 
     constructor() {
         this.client = createClient({
-            projectId: 'o4jdw3vx',
-            dataset: 'production',
-            useCdn: true,
-            apiVersion: '2024-03-01',
+            projectId: environment.sanity.projectId,
+            dataset: environment.sanity.dataset,
+            useCdn: environment.sanity.useCdn,
+            apiVersion: environment.sanity.apiVersion,
         });
         this.builder = imageUrlBuilder(this.client);
     }
