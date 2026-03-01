@@ -3,6 +3,7 @@ import { Home } from './pages/home/home';
 import { About } from './pages/about/about';
 import { Solutions } from './pages/solutions/solutions';
 import { Products } from './pages/products/products';
+import { ProductCategory } from './pages/products/category-details/category-details';
 import { Brands } from './pages/brands/brands';
 import { Clients } from './pages/clients/clients';
 import { Contact } from './pages/contact/contact';
@@ -39,6 +40,14 @@ export const routes: Routes = [
         data: {
             title: 'Products - The Electronics Bond',
             description: 'Browse our extensive catalog of electronic products.'
+        }
+    },
+    {
+        path: 'products/:category',
+        component: ProductCategory,
+        data: {
+            title: 'Product Category - The Electronics Bond',
+            description: 'Browse products by category.'
         }
     },
     {
