@@ -1,51 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { SanityService } from './sanity.service';
 
 export interface TeamMember {
     name: string;
-    designation: string;
-    image: string;
+    role: string;
+    designation?: string; // For backward compatibility
+    image: any;
+    bio?: string;
     socials?: {
         linkedin?: string;
         twitter?: string;
-        instagram?: string;
     };
+    order?: number;
 }
 
 @Injectable({
     providedIn: 'root'
 })
 export class TeamService {
-    private teamMembers: TeamMember[] = [
-        {
-            name: 'Dev Thakur',
-            designation: 'Founder & CEO',
-            image: 'teams/dev_thakur.jpg',
-
-        },
-        {
-            name: 'Raghu Raj',
-            designation: 'Operation Manager',
-            image: 'teams/raghu_raj.jpg',
-
-        },
-        {
-            name: 'Mohit Kumar',
-            designation: 'Relationship Head',
-            image: 'teams/mohit_kumar.jpg'
-
-        },
-        {
-            name: 'Varun Sharma',
-            designation: 'Account Head',
-            image: 'teams/varun_sharma.jpg'
-        },
-
-    ];
-
-    constructor() { }
+    constructor(private sanityService: SanityService) { }
 
     getTeamMembers(): Observable<TeamMember[]> {
-        return of(this.teamMembers);
+        const query = `*[_type == "teamMember"] | order(order asc, name asc)`;
+        return from(this.sanityService.fetch<TeamMember[]>(query));
     }
 }
