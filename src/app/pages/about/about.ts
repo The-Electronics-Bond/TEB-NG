@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { TeamService, TeamMember } from '../../core/services/team.service';
 import { SanityService } from '../../core/services/sanity.service';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
@@ -19,7 +20,6 @@ export class About {
     private sanityService: SanityService
   ) {
     this.teamMembers$ = this.teamService.getTeamMembers();
-    console.log(this.teamMembers$);
   }
 
   getImageUrl(source: any): string {

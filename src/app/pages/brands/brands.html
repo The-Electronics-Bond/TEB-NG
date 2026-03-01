@@ -1,58 +1,154 @@
+<!-- Hero Banner -->
 <section class="banner-section">
+    <div class="banner-bg-elements">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
     <div class="banner-content">
-        <h1 class="page-title">Our Trusted Partners</h1>
-        <p class="page-subtitle">Collaborating with global leaders to deliver excellence.</p>
+        <span class="banner-badge">Authorized Partnerships</span>
+        <h1 class="page-title">
+            The Brands That <span class="highlight">Power</span> Our Solutions
+        </h1>
+        <p class="page-subtitle">
+            We collaborate with the world's most trusted technology manufacturers to deliver
+            uncompromising quality for every project.
+        </p>
     </div>
 </section>
 
+<!-- Stats Bar -->
+<section class="stats-bar">
+    <div class="stats-container">
+        <div class="stat-item">
+            <span class="stat-number">{{ brands.length || '—' }}</span>
+            <span class="stat-label">Brand Partners</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Authorized Dealer</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number">Pan India</span>
+            <span class="stat-label">Service Network</span>
+        </div>
+    </div>
+</section>
+
+<!-- Brands Grid -->
 <section class="brands-section">
-    <div class="container">
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Our <span class="highlight">Partner</span> Ecosystem</h2>
+            <p class="section-subtitle">
+                Each brand in our portfolio is handpicked for its commitment to innovation, reliability, and performance.
+            </p>
+        </div>
+
+        @if (loading) {
+        <div class="loader-box">
+            <groupix-spinner size="xl" [ballCount]="5"></groupix-spinner>
+        </div>
+        } @else {
         <div class="brands-grid">
-            <!-- In a real app, these would be logos. Using text/placeholders for now. -->
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Sony" alt="Sony">
+            @for (brand of brands; track brand._id; let i = $index) {
+            <div class="brand-card" [style.animation-delay]="(i * 0.08) + 's'">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="logo-wrapper">
+                        <img [src]="getImageUrl(brand.logo)" [alt]="brand.name">
+                    </div>
+                    <span class="brand-name">{{ brand.name }}</span>
+                    @if (brand.website) {
+                    <a [href]="brand.website" target="_blank" rel="noopener noreferrer" class="visit-link">
+                        <span>Explore</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                    }
+                </div>
             </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=LG" alt="LG">
+            } @empty {
+            <div class="empty-state">
+                <p>Our network of partners is constantly growing. Check back soon!</p>
             </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Samsung" alt="Samsung">
+            }
+        </div>
+        }
+    </div>
+</section>
+
+<!-- Why Partner Section -->
+<section class="why-section">
+    <div class="section-container">
+        <h2 class="section-title">Why We Choose <span class="highlight">The Best</span></h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <h3 class="why-title">Authorized &amp; Certified</h3>
+                <p class="why-text">We are authorized dealers with direct manufacturer support, ensuring genuine
+                    products and full warranty coverage.</p>
             </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Bosch" alt="Bosch">
+            <div class="why-card">
+                <div class="why-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M2 12h20"></path>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="why-title">Global Standards</h3>
+                <p class="why-text">Every partner brand meets the highest international benchmarks for quality,
+                    safety, and innovation.</p>
             </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=IFB" alt="IFB">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Kent" alt="Kent">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Panasonic" alt="Panasonic">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Daikin" alt="Daikin">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Voltas" alt="Voltas">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Hitachi" alt="Hitachi">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Carrier" alt="Carrier">
-            </div>
-            <div class="brand-card">
-                <img src="https://placehold.co/200x100/FFF/000?text=Lloyd" alt="Lloyd">
+            <div class="why-card">
+                <div class="why-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </div>
+                <h3 class="why-title">End-to-End Support</h3>
+                <p class="why-text">From consultation and procurement to installation and after-sales — we've got
+                    every touchpoint covered.</p>
             </div>
         </div>
     </div>
 </section>
 
+<!-- CTA Section -->
 <section class="cta-section">
-    <div class="container mx-auto">
-        <h2 class="cta-title">Become a Partner</h2>
-        <p class="cta-text">Join our network of premium technology providers.</p>
-        <a routerLink="/contact" class="btn">Contact Us</a>
+    <div class="cta-bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+    <div class="section-container">
+        <div class="cta-glass-card">
+            <h2 class="cta-title">
+                Build Your <span class="highlight">Tech Bond</span>
+            </h2>
+            <p class="cta-subtitle">
+                Are you a premium manufacturer ready to transform enterprise infrastructure?
+                Let's discuss a partnership that lasts.
+            </p>
+            <a routerLink="/contact" class="btn-premium">
+                <span class="btn-text">Get in Touch</span>
+                <span class="btn-icon">&rarr;</span>
+            </a>
+        </div>
     </div>
 </section>

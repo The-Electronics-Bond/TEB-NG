@@ -1,70 +1,290 @@
+// ============================================
+// SOLUTIONS PAGE — Premium Revamp
+// ============================================
+
+// ---------- Hero Banner ----------
 .banner-section {
-    @apply bg-blue-900 text-white py-20 text-center;
+    @apply relative bg-slate-950 text-white min-h-[55vh] flex items-center justify-center overflow-hidden;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(147, 51, 234, 0.15) 0%, transparent 40%);
+
+    &::before {
+        content: '';
+        @apply absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none;
+    }
+
+    .banner-bg-elements {
+        @apply absolute inset-0 pointer-events-none;
+
+        .orb {
+            @apply absolute rounded-full opacity-20;
+            filter: blur(100px);
+        }
+
+        .orb-1 {
+            @apply w-[500px] h-[500px] bg-blue-600 -top-1/4 -left-1/4;
+            animation: orbFloat 10s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            @apply w-[400px] h-[400px] bg-purple-600 -bottom-1/4 -right-1/4;
+            animation: orbFloat 8s ease-in-out infinite reverse;
+        }
+
+        .orb-3 {
+            @apply w-[300px] h-[300px] bg-indigo-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+    }
+
+    .banner-content {
+        @apply container mx-auto px-6 relative z-10 text-center;
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .banner-badge {
+        @apply inline-block px-5 py-2 mb-8 rounded-full text-sm font-semibold tracking-wider uppercase;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(148, 163, 184, 1);
+        backdrop-filter: blur(8px);
+    }
 
     .page-title {
-        @apply text-4xl font-bold mb-2;
+        @apply text-5xl md:text-7xl font-extrabold mb-6 tracking-tight;
+
+        .highlight {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500;
+        }
     }
 
     .page-subtitle {
-        @apply text-blue-200 text-lg;
+        @apply text-xl md:text-2xl text-slate-400 font-light max-w-3xl mx-auto leading-relaxed;
     }
 }
 
-.solution-block {
-    @apply py-20 px-6 container mx-auto grid md:grid-cols-2 gap-12 items-center;
+// ---------- Solutions Section ----------
+.solutions-section {
+    @apply py-24 bg-white;
 
-    &.reverse {
-        // For alternating layout
-        @apply md:flex-row-reverse;
+    .section-container {
+        @apply container mx-auto px-6 flex flex-col gap-20;
+    }
 
-        // In Grid, we can just swap column order if we want, or use specific layouts.
-        // simpler method for grid:
-        .text-content {
-            @apply md:order-2;
-        }
+    .solution-card {
+        @apply grid md:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden border border-slate-100 transition-all duration-500 hover:shadow-2xl;
+        animation: fadeInUp 0.7s ease-out both;
 
-        .image-content {
-            @apply md:order-1;
+        &.is-reversed {
+            .solution-visual {
+                @apply md:order-2;
+            }
+
+            .solution-body {
+                @apply md:order-1;
+            }
         }
     }
 
-    .text-content {
-        @apply space-y-6;
+    .solution-visual {
+        @apply relative h-72 md:h-auto overflow-hidden;
+
+        img {
+            @apply w-full h-full object-cover transition-transform duration-700;
+        }
+
+        .visual-overlay {
+            @apply absolute inset-0 pointer-events-none;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.3) 0%, transparent 60%);
+        }
+    }
+
+    .solution-card:hover .solution-visual img {
+        @apply scale-105;
+    }
+
+    .solution-body {
+        @apply p-10 md:p-14 flex flex-col justify-center bg-slate-50;
+    }
+
+    .solution-number {
+        @apply text-6xl md:text-7xl font-black text-slate-100 leading-none mb-4 block;
+        -webkit-text-stroke: 1px rgba(148, 163, 184, 0.2);
     }
 
     .solution-title {
-        @apply text-3xl font-bold text-gray-900 border-l-4 border-blue-600 pl-4;
+        @apply text-2xl md:text-3xl font-bold text-slate-900 mb-5;
     }
 
     .solution-desc {
-        @apply text-lg text-gray-600 leading-relaxed;
+        @apply text-slate-500 leading-relaxed mb-8;
     }
 
-    .feature-list {
-        @apply grid gap-3 mt-4;
+    .feature-tags {
+        @apply flex flex-wrap gap-2;
 
-        li {
-            @apply flex items-center before:content-['•'] before:text-blue-500 before:mr-2 before:text-xl text-gray-700 font-medium;
-        }
-    }
+        .tag {
+            @apply px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 border border-slate-200 transition-all duration-300;
 
-    .image-content {
-        @apply relative overflow-hidden rounded-2xl shadow-xl;
-
-        img {
-            @apply w-full h-full object-cover transition-transform duration-700 hover:scale-105;
+            &:hover {
+                @apply bg-blue-600 text-white border-blue-600;
+            }
         }
     }
 }
 
-.cta-section {
-    @apply py-16 bg-gray-100 text-center mt-12;
+// ---------- Process Section ----------
+.process-section {
+    @apply py-24 bg-slate-50;
 
-    h2 {
-        @apply text-2xl font-bold text-gray-800 mb-6;
+    .section-container {
+        @apply container mx-auto px-6;
     }
 
-    .btn {
-        @apply inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md;
+    .section-title {
+        @apply text-4xl md:text-5xl font-bold text-center text-slate-900 mb-4;
+
+        .highlight {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
+        }
+    }
+
+    .section-subtitle {
+        @apply text-lg text-slate-500 text-center max-w-2xl mx-auto mb-16;
+    }
+
+    .process-grid {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto;
+    }
+
+    .process-step {
+        @apply relative bg-white p-10 rounded-[2rem] border border-slate-100 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-blue-100;
+
+        .step-icon-box {
+            @apply w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors duration-300;
+        }
+
+        .step-number {
+            @apply block text-4xl font-black text-slate-100 mb-2;
+        }
+
+        .step-title {
+            @apply text-xl font-bold text-slate-900 mb-3;
+        }
+
+        .step-text {
+            @apply text-sm text-slate-500 leading-relaxed;
+        }
+
+        &:hover {
+            .step-icon-box {
+                @apply bg-blue-600 text-white;
+            }
+        }
+    }
+}
+
+// ---------- CTA Section ----------
+.cta-section {
+    @apply py-32 bg-slate-950 relative overflow-hidden flex items-center justify-center;
+
+    .cta-bg-elements {
+        @apply absolute inset-0 pointer-events-none;
+
+        .glow {
+            @apply absolute rounded-full opacity-20 animate-pulse;
+            filter: blur(120px);
+        }
+
+        .glow-1 {
+            @apply -top-1/4 -left-1/4 w-[600px] h-[600px] bg-blue-600;
+            animation-duration: 8s;
+        }
+
+        .glow-2 {
+            @apply -bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-purple-600;
+            animation-duration: 6s;
+        }
+    }
+
+    .section-container {
+        @apply container mx-auto px-6 relative z-10;
+    }
+
+    .cta-glass-card {
+        @apply max-w-4xl mx-auto p-12 md:p-20 rounded-[3rem] text-center border border-white/10;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .cta-title {
+        @apply text-4xl md:text-7xl font-extrabold text-white mb-8 tracking-tight;
+
+        .highlight {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400;
+        }
+    }
+
+    .cta-subtitle {
+        @apply text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed;
+    }
+
+    .btn-premium {
+        @apply inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-950 font-bold rounded-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95 overflow-hidden relative;
+
+        &:hover {
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-text {
+            @apply relative z-10;
+        }
+
+        .btn-icon {
+            @apply relative z-10 transition-transform;
+        }
+
+        &:hover .btn-icon {
+            @apply translate-x-1;
+        }
+
+        &::after {
+            content: '';
+            @apply absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-0 transition-opacity duration-300;
+        }
+
+        &:hover::after {
+            @apply opacity-100;
+        }
+    }
+}
+
+// ---------- Animations ----------
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes orbFloat {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -20px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(-20px, 15px) scale(0.95);
     }
 }
