@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TeamService, TeamMember } from '../../core/services/team.service';
+import { SanityService } from '../../core/services/sanity.service';
 
 @Component({
     selector: 'app-team',
@@ -8,7 +10,10 @@ import { CommonModule } from '@angular/common';
     templateUrl: './team.html',
     styleUrl: './team.scss',
 })
-export class Team {
+export class Team implements OnInit {
+    teamMembers: TeamMember[] = [];
+
+    // Keeping these as they are not currently in Sanity schema but used in template
     managementTeam = [
         {
             name: 'Executive Leadership',
@@ -42,4 +47,19 @@ export class Team {
             ]
         }
     ];
+
+    constructor(
+        private teamService: TeamService,
+        private sanityService: SanityService
+    ) { }
+
+    ngOnInit(): void {
+        this.teamService.getTeamMembers().subscribe(members => {
+            this.teamMembers = members;
+        });
+    }
+
+    getImageUrl(source: any): string {
+        return this.sanityService.getImageUrl(source).url();
+    }
 }

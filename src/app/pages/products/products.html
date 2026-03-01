@@ -1,40 +1,146 @@
-<section class="page-header">
-    <div class="header-content">
-        <h1 class="page-title">Our Products</h1>
-        <p class="page-subtitle">Premium equipment from world-class manufacturers.</p>
+<!-- Hero Banner -->
+<section class="banner-section">
+    <div class="banner-bg-elements">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    <div class="banner-content">
+        @if (selectedCategory) {
+        <button (click)="backToCategories()" class="back-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            All Categories
+        </button>
+        } @else {
+        <span class="banner-badge">Product Catalog</span>
+        }
+        <h1 class="page-title">
+            @if (selectedCategory) {
+            {{ selectedCategory.title }}
+            } @else {
+            Our <span class="highlight">Products</span>
+            }
+        </h1>
+        <p class="page-subtitle">
+            {{ selectedCategory ? selectedCategory.description : 'Premium equipment from world-class manufacturers,
+            tailored for enterprise needs.' }}
+        </p>
     </div>
 </section>
 
-<section class="category-section">
-    <div class="container">
-        @if (categories$ | async; as categories) {
-        <div class="category-grid">
-            @for (category of categories; track category._id) {
-            <a [routerLink]="['/products', category.slug.current]" class="category-card group">
-                <div class="card-image">
-                    <img [src]="category.imageUrl || 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800'"
-                        [alt]="category.name">
+<!-- Loading State -->
+@if (loading) {
+<section class="loading-section">
+    <div class="loader-box">
+        <groupix-spinner size="xl" [ballCount]="5"></groupix-spinner>
+    </div>
+</section>
+}
+
+<!-- Categories Grid -->
+@if (!selectedCategory && !loading) {
+<section class="categories-section">
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Browse by <span class="highlight">Category</span></h2>
+            <p class="section-subtitle">Select a category to explore our curated product range.</p>
+        </div>
+        <div class="categories-grid">
+            @for (cat of categories; track cat.slug.current; let i = $index) {
+            <div (click)="selectCategory(cat)" class="category-card" [style.animation-delay]="(i * 0.1) + 's'">
+                <div class="card-image-box">
+                    <img [src]="getImageUrl(cat.image)" [alt]="cat.title">
+                    <div class="image-overlay"></div>
                 </div>
-                <div class="card-content">
-                    <h2 class="category-title">{{ category.name }}</h2>
-                    <p class="category-desc">{{ category.description }}</p>
-                    <span class="btn-link">View Models &rarr;</span>
+                <div class="card-body">
+                    <h3 class="card-title">{{ cat.title }}</h3>
+                    <p class="card-desc">{{ cat.description }}</p>
+                    <span class="card-link">
+                        View Products
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </span>
                 </div>
-            </a>
+            </div>
             }
         </div>
-        } @else {
-        <div class="loading-state">
-            <p>Connecting to catalog...</p>
+    </div>
+</section>
+}
+
+<!-- Products Grid -->
+@if (selectedCategory && !loading) {
+<section class="products-section">
+    <div class="section-container">
+        <div class="products-grid">
+            @for (product of products; track product._id; let i = $index) {
+            <div class="product-card" [style.animation-delay]="(i * 0.08) + 's'">
+                <div class="product-image-box">
+                    <img [src]="getImageUrl(product.image)" [alt]="product.name">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-desc">{{ product.description }}</p>
+
+                    @if (product.brands && product.brands.length > 0) {
+                    <div class="product-brands">
+                        <span class="brands-label">Available Brands</span>
+                        <div class="brand-tags">
+                            @for (brand of product.brands; track brand) {
+                            <span class="brand-tag">{{ brand }}</span>
+                            }
+                        </div>
+                    </div>
+                    }
+
+                    <a routerLink="/contact" class="inquire-link">
+                        <span>Inquire Now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            } @empty {
+            <div class="empty-state">
+                <p class="empty-text">No products found in this category yet.</p>
+                <button (click)="backToCategories()" class="empty-back-btn">Back to All Categories</button>
+            </div>
+            }
         </div>
         }
 
     </div>
 </section>
+}
 
-<section class="cta-banner">
-    <div class="container">
-        <p class="cta-text">Looking for a specific model or bulk pricing?</p>
-        <a routerLink="/contact" class="btn-outline">Request a Quote</a>
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+    <div class="section-container">
+        <div class="cta-glass-card">
+            <h2 class="cta-title">
+                Need a <span class="highlight">Custom Quote</span>?
+            </h2>
+            <p class="cta-subtitle">
+                Looking for a specific model, bulk pricing, or a tailored solution?
+                Our team is ready to help.
+            </p>
+            <a routerLink="/contact" class="btn-premium">
+                <span class="btn-text">Request a Quote</span>
+                <span class="btn-icon">&rarr;</span>
+            </a>
+        </div>
     </div>
 </section>

@@ -29,6 +29,28 @@
             </div>
         </div>
 
+        <!-- Sanity Team Members Section -->
+        @if (teamMembers.length > 0) {
+        <div class="team-category mb-16">
+            <h2 class="category-header">Our Team</h2>
+            <div class="management-grid">
+                @for (member of teamMembers; track member.name) {
+                <div class="member-card">
+                    <div class="member-avatar">
+                        <img [src]="getImageUrl(member.image)" [alt]="member.name"
+                            class="rounded-full w-full h-full object-cover">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">{{ member.name }}</h3>
+                        <p class="member-role">{{ member.role }}</p>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        }
+
+
         <!-- Departments Section -->
         <div class="departments-grid">
             @for (dept of departments; track dept.name) {
