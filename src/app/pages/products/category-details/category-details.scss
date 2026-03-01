@@ -1,0 +1,107 @@
+.category-header {
+    @apply bg-gray-900 text-white py-16;
+
+    .container {
+        @apply max-w-7xl mx-auto px-6;
+    }
+
+    .back-link {
+        @apply text-blue-400 text-sm mb-4 inline-block hover:text-blue-300 transition-colors;
+    }
+
+    .category-title {
+        @apply text-4xl font-bold mb-4;
+    }
+
+    .category-desc {
+        @apply text-gray-400 text-lg max-w-2xl;
+    }
+}
+
+.products-section {
+    @apply py-20 bg-gray-50;
+
+    .container {
+        @apply max-w-7xl mx-auto px-6;
+    }
+
+    .product-grid {
+        @apply grid md:grid-cols-2 lg:grid-cols-3 gap-8;
+    }
+
+    .product-card {
+        @apply bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col;
+
+        .product-image {
+            @apply h-64 overflow-hidden bg-gray-200;
+
+            img {
+                @apply w-full h-full object-cover transition-transform duration-500 hover:scale-105;
+            }
+        }
+
+        .product-content {
+            @apply p-6 flex flex-col flex-grow;
+        }
+
+        .product-brand {
+            @apply text-blue-600 text-xs font-bold uppercase tracking-wider mb-2;
+        }
+
+        .product-name {
+            @apply text-xl font-bold text-gray-900 mb-3;
+        }
+
+        .product-description {
+            @apply text-gray-600 text-sm mb-6 flex-grow;
+        }
+
+        .specs-list {
+            @apply flex flex-wrap gap-2 mb-6;
+
+            .spec-tag {
+                @apply px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full;
+            }
+        }
+
+        .btn-inquire {
+            @apply w-full py-3 bg-gray-900 text-white text-center font-bold rounded-xl hover:bg-blue-600 transition-colors;
+        }
+    }
+}
+
+.cta-banner {
+    @apply py-16 bg-blue-900 text-white text-center;
+
+    .container {
+        @apply max-w-7xl mx-auto px-6;
+    }
+
+    h3 {
+        @apply text-2xl font-bold mb-4;
+    }
+
+    p {
+        @apply text-blue-200 mb-8;
+    }
+
+    .btn-white {
+        @apply px-8 py-3 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-colors;
+    }
+}
+
+.not-found {
+    @apply py-32 text-center;
+    
+    .container {
+        @apply max-w-7xl mx-auto px-6;
+    }
+
+    h1 {
+        @apply text-3xl font-bold mb-4;
+    }
+
+     .btn-primary {
+        @apply px-8 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-all inline-block mt-6;
+    }
+}

@@ -1,0 +1,53 @@
+@if (category$ | async; as category) {
+<section class="category-header">
+    <div class="container">
+        <a routerLink="/products" class="back-link">&larr; Back to Categories</a>
+        <h1 class="category-title">{{ category.name }}</h1>
+        <p class="category-desc">{{ category.description }}</p>
+    </div>
+</section>
+
+<section class="products-section">
+    <div class="container">
+        <div class="product-grid">
+            @for (product of category.products; track product._id) {
+            <div class="product-card">
+                <div class="product-image">
+                    <img [src]="product.imageUrl || 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800'"
+                        [alt]="product.name">
+                </div>
+                <div class="product-content">
+                    <div class="product-brand">{{ product.brand }}</div>
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <p class="product-description">{{ product.description }}</p>
+
+                    <div class="specs-list">
+                        @for (spec of product.specifications; track spec) {
+                        <span class="spec-tag">{{ spec }}</span>
+                        }
+                    </div>
+
+                    <a routerLink="/contact" class="btn-inquire">Inquire for Details</a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="container">
+        <h3>Looking for something else in {{ category.name }}?</h3>
+        <p>Contact us for custom requirements or bulk pricing.</p>
+        <a routerLink="/contact" class="btn-white">Contact Sales Team</a>
+    </div>
+</section>
+} @else {
+<section class="not-found">
+    <div class="container">
+        <h1>Catalog Syncing...</h1>
+        <p>Please wait while we connect to the server.</p>
+        <a routerLink="/products" class="btn-primary">Back to Products</a>
+    </div>
+</section>
+}
