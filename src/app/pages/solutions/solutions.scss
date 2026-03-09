@@ -110,7 +110,7 @@
 
     .solution-number {
         @apply text-6xl md:text-7xl font-black text-slate-100 leading-none mb-4 block;
-        -webkit-text-stroke: 1px rgba(148, 163, 184, 0.2);
+        -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.4);
     }
 
     .solution-title {
@@ -167,6 +167,7 @@
 
         .step-number {
             @apply block text-4xl font-black text-slate-100 mb-2;
+            -webkit-text-stroke: 1px rgba(15, 23, 42, 0.3);
         }
 
         .step-title {
