@@ -15,11 +15,6 @@ import { Observable } from 'rxjs';
 export class Team {
     teamMembers$: Observable<TeamMember[]>;
 
-    managementTeam = [
-        { name: 'Arshdeep Singh', role: 'Managing Director', initials: 'AS' },
-        { name: 'Senior Management', role: 'Operations & Strategy', initials: 'SM' },
-    ];
-
     constructor(
         private teamService: TeamService,
         private sanityService: SanityService,
