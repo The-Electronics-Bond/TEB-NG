@@ -25,8 +25,4 @@ export const APP_INFO = {
         twitter: '#',
         instagram: '#'
     },
-    developer: {
-        name: 'Arshdeep Singh',
-        url: 'https://www.arshdeepsingh.info?utm_source=the-electronics-bond&utm_medium=footer&utm_campaign=developer_credit&utm_content=footer_link'
-    }
 };

@@ -26,7 +26,7 @@
                 <h4 class="col-title">Solutions</h4>
                 <ul class="link-list">
                     <li><a routerLink="/solutions" class="footer-link">Digital Signage</a></li>
-                    <li><a routerLink="/solutions" class="footer-link">AV Solutions</a></li>
+                    <li><a routerLink="/solutions" class="footer-link">Smart Technology</a></li>
                     <li><a routerLink="/solutions" class="footer-link">Corporate Gifting</a></li>
                     <li><a routerLink="/solutions" class="footer-link">Hospitality TV</a></li>
                 </ul>
@@ -37,6 +37,7 @@
                 <h4 class="col-title">Contact Us</h4>
                 <ul class="contact-list">
                     <li>{{ appInfo.address.fullAddress }}</li>
+                    <li><strong>GST NO:</strong> {{ appInfo.gst }}</li>
                     <li *ngFor="let phone of appInfo.phones">
                         <a [href]="'tel:' + phone.replace(' ', '')" class="footer-link">{{ phone }}</a>
                     </li>
